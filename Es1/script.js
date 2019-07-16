@@ -4,15 +4,17 @@
 // sono stati individuati;
 
 
-//dichiaro i due array vuoti
+//dichiaro gli array vuoti
 var arrayNumbers = [];
 var arrayNumbersUtente = [];
+var arrayFinale = [];
 
 //dichiaro la funzione per ripetere un numero fino a max (il cui max viene settato all'interno della
 //funzione funzioneRandom a 100)
 function numeroRandom(max) {
   return Math.floor( Math.random() * max ) + 1;
 }
+//TO DO: EVITARE DOPPIONI NUMERI
 
 //setto il countdown a 0 per contare le volte in cui la cpu genera un numero
 var countdown = 0;
@@ -24,7 +26,7 @@ while ( countdown < 5 ) {
   countdown += 1;
 }
 alert(arrayNumbers);
-console.log("Questi sono i numeri random" + arrayNumbers);
+console.log("Questi sono i numeri random " + arrayNumbers);
 }
 funzioneRandom();
 
@@ -36,15 +38,17 @@ setTimeout(funzioneUtente, 3000);
 var domanda;
 
 function funzioneUtente() {
-  //setto il contatore a 0 per contare le volte in cui l'utente scrive un numero esatto
-  var contatore = 0;
-for (var i = 0; i < arrayNumbers.length; i++) {
-    domanda = parseInt(prompt("Inserisci, in sequenza, i numeri visti in precedenza"));
-  if (domanda === arrayNumbers[i]) {
-     arrayNumbersUtente.push(domanda);
-     //il contatore aumenta di 1 a ogni numero corretto inserito
-     contatore += 1;
-  }
-  console.log("Questi sono i numeri indovinati: " + arrayNumbersUtente + " Numeri totali indovinati: " + contatore);
+  for (var i = 0; i < arrayNumbers.length; i++) {
+ domanda = parseInt(prompt("Inserisci, in sequenza, i numeri visti in precedenza"));
+ arrayNumbersUtente.push(domanda);
 }
+console.log(arrayNumbersUtente);
+
+//verifica
+for (var i = 0; i < arrayNumbers.length; i++) {
+  if (arrayNumbers.includes(arrayNumbersUtente[i]) === true) {
+    arrayFinale.push(arrayNumbersUtente[i]);
+  }
+}
+document.write("Hai indovinato i numeri: " + arrayFinale + " per un totale di: " + arrayFinale.length + " numeri");
 }
